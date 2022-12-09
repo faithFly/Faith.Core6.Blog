@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Faith.Console6/1.0.0": {
+        "dependencies": {
+          "Faith.EntityModel": "1.0.0"
+        },
+        "runtime": {
+          "Faith.Console6.dll": {}
+        }
+      },
+      "Faith.EntityModel/1.0.0": {
+        "runtime": {
+          "Faith.EntityModel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Faith.Console6/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Faith.EntityModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,12 @@
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\bin\Release\net6.0\Faith.Domain.Shared.deps.json
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\bin\Release\net6.0\Faith.Domain.Shared.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\bin\Release\net6.0\Faith.Domain.Shared.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\Faith.Domain.Shared.csproj.AssemblyReference.cache
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\Faith.Domain.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\Faith.Domain.Shared.AssemblyInfoInputs.cache
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\Faith.Domain.Shared.AssemblyInfo.cs
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\Faith.Domain.Shared.csproj.CoreCompileInputs.cache
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\Faith.Domain.Shared.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\refint\Faith.Domain.Shared.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\Faith.Domain.Shared.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain.Shared\obj\Release\net6.0\ref\Faith.Domain.Shared.dll

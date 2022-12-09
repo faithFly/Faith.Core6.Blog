@@ -1,0 +1,17 @@
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\bin\Release\net6.0\Faith.DbMigrator.deps.json
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\bin\Release\net6.0\Faith.DbMigrator.runtimeconfig.json
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\bin\Release\net6.0\Faith.DbMigrator.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\bin\Release\net6.0\Faith.DbMigrator.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\bin\Release\net6.0\Faith.EntityModel.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\bin\Release\net6.0\Faith.EntityModel.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.csproj.AssemblyReference.cache
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.AssemblyInfoInputs.cache
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.AssemblyInfo.cs
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.csproj.CoreCompileInputs.cache
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.csproj.CopyComplete
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\refint\Faith.DbMigrator.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\Faith.DbMigrator.genruntimeconfig.cache
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.DbMigrator\obj\Release\net6.0\ref\Faith.DbMigrator.dll
