@@ -3,6 +3,7 @@ using System;
 using Faith.DbMigrator.Faith.Dbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Faith.DbMigrator.Migrations
 {
     [DbContext(typeof(faithdbContext))]
-    partial class faithdbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209062343_addArtTable")]
+    partial class addArtTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

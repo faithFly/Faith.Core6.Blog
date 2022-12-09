@@ -19,6 +19,7 @@ namespace Faith.DbMigrator.Faith.Dbcontext
         public virtual DbSet<T_Users> T_Users { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<T_Log> T_Logs { get; set; }
+        public virtual DbSet<T_Article> T_Articles { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

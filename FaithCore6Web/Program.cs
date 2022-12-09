@@ -16,7 +16,7 @@ using SqlSugar;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls(new[] { "http://*:12138" });
+//builder.WebHost.UseUrls(new[] { "http://*:12138" });
 var config = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();

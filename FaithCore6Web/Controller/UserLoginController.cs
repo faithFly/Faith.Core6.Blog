@@ -35,7 +35,7 @@ namespace FaithCore6Web.Controller
             }
             
         }
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         [HttpPost]
         public async Task<ResultDto<User>> RegistUserAsync([FromBody] User user) {
             try
