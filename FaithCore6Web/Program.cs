@@ -23,6 +23,7 @@ var config = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton(new UploadFileHelper(config));
+
 #region 分布式缓存
 builder.Services.AddScoped<DistributedCacheService>();
 builder.Services.AddDistributedMemoryCache();
@@ -35,6 +36,7 @@ builder.Services.AddDistributedMemoryCache();
     options.InstanceName = "TEST."; //KEY前缀，也就是相当于 + 了一层命名空间
 });*/
 #endregion
+
 #region Jwt
 //注入jwt帮助类
 builder.Services.AddSingleton(new JWTHelper(config));

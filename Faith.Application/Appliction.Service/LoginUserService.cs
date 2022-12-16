@@ -81,11 +81,7 @@ namespace Faith.Application.Appliction.Service
             var userObj = await _client.Users.Where(p => p.UserName == user.UserName).SingleOrDefaultAsync();
             if (userObj!=null)
             {
-                return new ResultDto<User>
-                {
-                    ResultCode = 500,
-                    ResultMsg = "该用户已经存在！"
-                };
+                throw new UserFriendlyException(404, "该用户已经存在");
             }
             string Md5Pwd = "";
             using (var md5 = MD5.Create())
@@ -106,10 +102,7 @@ namespace Faith.Application.Appliction.Service
             }
             else
             {
-                return new ResultDto<User>
-                {
-                    ResultCode = 500
-                };
+                throw new UserFriendlyException(500, "插入失败！");
             }
         }
     }
