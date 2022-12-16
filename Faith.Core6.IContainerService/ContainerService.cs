@@ -29,6 +29,7 @@ namespace Faith.Core6.IContainerService
             builder.RegisterType<CountryNightService>().As<ICountryNightService>().InstancePerLifetimeScope();
             builder.RegisterType<LogService>().As<ILogService>().InstancePerLifetimeScope();
             builder.RegisterType<LoginUserService>().As<ILoginUserService>().InstancePerLifetimeScope();
+
             builder.AddSqlSugar();
             container = builder.Build();
         }

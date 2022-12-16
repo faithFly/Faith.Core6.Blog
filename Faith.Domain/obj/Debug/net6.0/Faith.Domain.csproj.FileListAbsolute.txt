@@ -10,3 +10,10 @@ C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\obj\Debug\net6.0\Faith.Do
 C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\obj\Debug\net6.0\refint\Faith.Domain.dll
 C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\obj\Debug\net6.0\Faith.Domain.pdb
 C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\obj\Debug\net6.0\ref\Faith.Domain.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\bin\Debug\net6.0\Faith.Application.Contracts.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\bin\Debug\net6.0\Faith.Core6.SqlSugar.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\bin\Debug\net6.0\Faith.EntityModel.dll
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\bin\Debug\net6.0\Faith.Application.Contracts.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\bin\Debug\net6.0\Faith.Core6.SqlSugar.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\bin\Debug\net6.0\Faith.EntityModel.pdb
+C:\Users\faith\Desktop\File\FaithCore6Web\Faith.Domain\obj\Debug\net6.0\Faith.Domain.csproj.CopyComplete

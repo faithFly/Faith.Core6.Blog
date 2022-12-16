@@ -1,4 +1,5 @@
 ﻿using Faith.Application.Contracts.Application.Dto;
+using Faith.Application.Contracts.Application.Dto.ExceptionDto;
 using Faith.Application.Contracts.Application.IService;
 using Faith.DbMigrator.Faith.Dbcontext;
 using Faith.Domain.JWT;
@@ -48,11 +49,7 @@ namespace Faith.Application.Appliction.Service
             var userObj =await _client.Users.Where(p => p.UserName == userLogin.UserName && p.UserPassWord == Md5Pwd).SingleOrDefaultAsync();
             if (userObj==null)
             {
-                return new ResultDto<User>
-                {
-                    ResultCode = 500,
-                    ResultMsg ="未查到改用户"
-                };
+                throw new UserFriendlyException(404, "用户不存在!");
             }
             else
             {

@@ -51,17 +51,18 @@ namespace Faith.Console6
             }*/
             #endregion
             #region sample factory
-            Operation operation = SampleFactory.CreateOperation("+");
-            operation.numberA = 1;
-            operation.numberB = 1;
-            Console.WriteLine(operation.GetResult());
-            Operation operation1 = SampleFactory.CreateOperation("-");
-            operation1.numberA = 1;
-            operation1.numberB = 1;
-            Console.WriteLine(operation1.GetResult());
+            /*            Operation operation = SampleFactory.CreateOperation("+");
+                        operation.numberA = 1;
+                        operation.numberB = 1;
+                        Console.WriteLine(operation.GetResult());
+                        Operation operation1 = SampleFactory.CreateOperation("-");
+                        operation1.numberA = 1;
+                        operation1.numberB = 1;
+                        Console.WriteLine(operation1.GetResult());*/
             #endregion
 
-
+            TimeSpan ts = new TimeSpan(10800);
+            Console.WriteLine(ts);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace Faith.Application.Contracts.Application.Dto.Article
 {
     public class InsertArticlesDto
     {
-        public string Id { get; set; }
         /// <summary>
         /// 分类id
         /// </summary>
@@ -21,25 +21,6 @@ namespace Faith.Application.Contracts.Application.Dto.Article
         /// Md5文件路劲
         /// </summary>
         public string Md5ArticleFileUrl { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? CreateTime { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdateTime { get; set; }
-        /// <summary>
-        /// 更新人
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        /// 是否删除
-        /// </summary>
-        public int IsDel { get; set; }
+        public IFormFile file { get; set; }
     }
 }

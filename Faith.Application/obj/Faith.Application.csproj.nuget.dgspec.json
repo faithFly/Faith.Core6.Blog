@@ -46,6 +46,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -314,7 +320,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\faith\\Desktop\\File\\FaithCore6Web\\Faith.Application.Contracts\\Faith.Application.Contracts.csproj": {
+                "projectPath": "C:\\Users\\faith\\Desktop\\File\\FaithCore6Web\\Faith.Application.Contracts\\Faith.Application.Contracts.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -327,6 +337,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
               "version": "[6.0.0, )"
