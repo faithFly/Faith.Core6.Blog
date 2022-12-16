@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Faith.Core6.SqlSugar\Faith.Core6.SqlSugar.csproj" />
     <ProjectReference Include="..\Faith.EntityModel\Faith.EntityModel.csproj" />
   </ItemGroup>

@@ -10,6 +10,12 @@ namespace Faith.Application.Contracts.Application.IService
 {
     public interface ILogService
     {
-        Task<ResultDto<T_Log>> GetLogListAsync();
+        /// <summary>
+        /// 获取日志列表
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        Task<ResultDto<T_Log>> GetLogListAsync(int pageSize,int pageIndex);
     }
 }

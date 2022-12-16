@@ -19,6 +19,45 @@ namespace Faith.DbMigrator.Migrations
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Faith.EntityModel.Entity.T_Article", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(95)");
+
+                    b.Property<string>("ArticleTitle")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CategorysId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("IsDel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Md5ArticleFileUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UpdateBy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("T_Articles");
+                });
+
             modelBuilder.Entity("Faith.EntityModel.Entity.T_Log", b =>
                 {
                     b.Property<string>("Id")

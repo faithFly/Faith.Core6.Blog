@@ -15,13 +15,15 @@ namespace FaithCore6Web.Controller
     public class LogController : ControllerBase
     {
         [HttpGet]
-        public async Task<ResultDto<T_Log>> GetLogListAsync()
+        public async Task<ResultDto<T_Log>> GetLogListAsync(int pageSize,int pageIndex)
         {
             using (var life = ContainerService.BeginLifetimeScope())
             {
                 ILogService service = life.Resolve<ILogService>();
-                return await service.GetLogListAsync();
+                return await service.GetLogListAsync(pageSize,pageIndex);
             }
         }
+        //这里之后要做分库分表使用sqlsugar
+
     }
 }

@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Faith.Application.Appliction.Service;
+using Faith.Application.Appliction.Service.Cache;
 using Faith.Application.Contracts.Application.IService;
 using Faith.Core6.IContainerService;
 using Faith.Core6.SqlSugar;
@@ -8,6 +9,7 @@ using Faith.DbMigrator.Faith.Dbcontext;
 using Faith.Domain.Excel;
 using Faith.Domain.JWT;
 using Faith.Domain.Shared.Enum;
+using Faith.Domain.Upload;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,11 +18,23 @@ using SqlSugar;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls(new[] { "http://*:12138" });
+//builder.WebHost.UseUrls(new[] { "http://*:12138" });
 var config = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
-
+builder.Services.AddSingleton(new UploadFileHelper(config));
+#region 分布式缓存
+builder.Services.AddScoped<DistributedCacheService>();
+builder.Services.AddDistributedMemoryCache();
+/*builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.ConfigurationOptions = new ConfigurationOptions();
+    options.ConfigurationOptions.Password = "********"; // Redis的密码
+    options.ConfigurationOptions.EndPoints.Add(IPEndPoint.Parse("*********")); // Redis的地址，支持主从复制，自动识别主节点
+    options.ConfigurationOptions.DefaultDatabase = 0; // 默认的数据库
+    options.InstanceName = "TEST."; //KEY前缀，也就是相当于 + 了一层命名空间
+});*/
+#endregion
 #region Jwt
 //注入jwt帮助类
 builder.Services.AddSingleton(new JWTHelper(config));

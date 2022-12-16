@@ -1,4 +1,5 @@
 ﻿using Faith.Application.Contracts.Application.Dto;
+using Faith.Application.Contracts.Application.Dto.ExceptionDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;

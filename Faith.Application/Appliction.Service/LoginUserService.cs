@@ -1,4 +1,5 @@
 ﻿using Faith.Application.Contracts.Application.Dto;
+using Faith.Application.Contracts.Application.Dto.ExceptionDto;
 using Faith.Application.Contracts.Application.IService;
 using Faith.DbMigrator.Faith.Dbcontext;
 using Faith.Domain.JWT;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,14 +38,18 @@ namespace Faith.Application.Appliction.Service
                 };
             }
             //Md5加密...
-            var userObj =await _client.Users.Where(p => p.UserName == userLogin.UserName && p.UserPassWord == userLogin.UserPassWord).SingleOrDefaultAsync();
+            string Md5Pwd = "";
+            using (var md5 = MD5.Create())
+            {
+                var result = md5.ComputeHash(Encoding.UTF8.GetBytes(userLogin.UserPassWord));
+                var strResult = BitConverter.ToString(result);
+                Md5Pwd = strResult.Replace("-", "");
+
+            }
+            var userObj =await _client.Users.Where(p => p.UserName == userLogin.UserName && p.UserPassWord == Md5Pwd).SingleOrDefaultAsync();
             if (userObj==null)
             {
-                return new ResultDto<User>
-                {
-                    ResultCode = 500,
-                    ResultMsg ="未查到改用户"
-                };
+                throw new UserFriendlyException(404, "用户不存在!");
             }
             else
             {
@@ -80,6 +86,14 @@ namespace Faith.Application.Appliction.Service
                     ResultCode = 500,
                     ResultMsg = "该用户已经存在！"
                 };
+            }
+            string Md5Pwd = "";
+            using (var md5 = MD5.Create())
+            {
+                var result = md5.ComputeHash(Encoding.UTF8.GetBytes(user.UserPassWord));
+                var strResult = BitConverter.ToString(result);
+                Md5Pwd = strResult.Replace("-", "");
+
             }
             await _client.Users.AddAsync(user);
             var flag =await _client.SaveChangesAsync();
