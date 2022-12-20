@@ -4,25 +4,52 @@ using Faith.Application.Appliction.Service;
 using Faith.Application.Appliction.Service.Cache;
 using Faith.Application.Contracts.Application.IService;
 using Faith.Core6.IContainerService;
+using Faith.Core6.Redis;
 using Faith.Core6.SqlSugar;
 using Faith.DbMigrator.Faith.Dbcontext;
 using Faith.Domain.Excel;
 using Faith.Domain.JWT;
 using Faith.Domain.Shared.Enum;
 using Faith.Domain.Upload;
+using FaithCore6Web.Filter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SqlSugar;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Faith.Domain.UserSession;
+using AutoMapper;
+using Faith.Domain.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.WebHost.UseUrls(new[] { "http://*:12138" });
 var config = builder.Configuration;
-builder.Services.AddControllers();
+AutoMapper.IConfigurationProvider mapperConfig = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile<FaithMapperProfile>();
+});
+builder.Services.AddSingleton(mapperConfig);
+builder.Services.AddScoped<IMapper,Mapper>();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton(new UploadFileHelper(config));
+builder.Services.AddTransient<IFaithUserSession, FaithUserSession>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+#region 过滤器
+builder.Services.AddControllers(opt => {
+    opt.Filters.Add<ExceptionFilter>();
+}).AddNewtonsoftJson(options =>
+{
+    //忽略循环引用
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    //设置时间格式
+    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+    // 小写
+    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+});
+#endregion
 
 #region 分布式缓存
 builder.Services.AddScoped<DistributedCacheService>();
@@ -37,9 +64,23 @@ builder.Services.AddDistributedMemoryCache();
 });*/
 #endregion
 
+#region 实体类存储配置
+builder.Services.Configure<RedisConfig>(opt =>
+{
+    opt.Name = config["Redis:Name"].ToString();
+    opt.Ip = config["Redis:Ip"].ToString();
+    opt.Password = config["Redis:Password"].ToString();
+    opt.Port = int.Parse(config["Redis:Port"]);
+    opt.Timeout = int.Parse(config["Redis:Timeout"]);
+    opt.Db = int.Parse(config["Redis:Db"]);
+    opt.Key = config["Redis:Key"].ToString();
+});
+builder.Services.AddSingleton<IRedisClient, RedisClient>();
+#endregion
+
 #region Jwt
 //注入jwt帮助类
-builder.Services.AddSingleton(new JWTHelper(config));
+builder.Services.AddSingleton(new JWTHelper());
 //注册服务
 builder.Services.AddAuthentication(options =>
 {

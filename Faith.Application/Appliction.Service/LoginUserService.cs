@@ -89,8 +89,11 @@ namespace Faith.Application.Appliction.Service
                 var result = md5.ComputeHash(Encoding.UTF8.GetBytes(user.UserPassWord));
                 var strResult = BitConverter.ToString(result);
                 Md5Pwd = strResult.Replace("-", "");
-
+                user.UserPassWord = Md5Pwd;
             }
+            user.Id = Guid.NewGuid().ToString();
+            user.CreateTime = DateTime.Now;
+            user.UpdateTime = DateTime.Now;
             await _client.Users.AddAsync(user);
             var flag =await _client.SaveChangesAsync();
             if (flag>0)

@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Faith.EntityModel.Entity;
+using Microsoft.Extensions.Logging;
 
 namespace Faith.DbMigrator.Faith.Dbcontext
 {
     public partial class faithdbContext : DbContext
     {
+        private static ILoggerFactory logger = LoggerFactory.Create(builer => builer.AddConsole());
         public faithdbContext() { }
        
         public faithdbContext(DbContextOptions<faithdbContext> options)
@@ -20,6 +22,7 @@ namespace Faith.DbMigrator.Faith.Dbcontext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<T_Log> T_Logs { get; set; }
         public virtual DbSet<T_Article> T_Articles { get; set; }
+        public virtual DbSet<T_Categorize> T_Categorize { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -27,6 +30,7 @@ namespace Faith.DbMigrator.Faith.Dbcontext
                 optionsBuilder.UseMySql("Server=120.79.81.249;Port=3306;Database=faithdb;Uid=root;Pwd=Xyf12138...;pooling=true;",
                     ServerVersion.Parse("5.7-mysql")
                     );
+                optionsBuilder.UseLoggerFactory(logger);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
