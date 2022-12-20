@@ -20,12 +20,12 @@
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
@@ -33,6 +33,7 @@
     <ProjectReference Include="..\Faith.Application.Contracts\Faith.Application.Contracts.csproj" />
     <ProjectReference Include="..\Faith.Application\Faith.Application.csproj" />
     <ProjectReference Include="..\Faith.Core6.IContainerService\Faith.Core6.IContainerService.csproj" />
+    <ProjectReference Include="..\Faith.Core6.Redis\Faith.Core6.Redis.csproj" />
     <ProjectReference Include="..\Faith.Core6.SqlSugar\Faith.Core6.SqlSugar.csproj" />
     <ProjectReference Include="..\Faith.DbMigrator\Faith.DbMigrator.csproj" />
     <ProjectReference Include="..\Faith.Domain.Shared\Faith.Domain.Shared.csproj" />

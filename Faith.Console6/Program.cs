@@ -61,8 +61,6 @@ namespace Faith.Console6
                         Console.WriteLine(operation1.GetResult());*/
             #endregion
 
-            TimeSpan ts = new TimeSpan(10800);
-            Console.WriteLine(ts);
         }
     }
 }

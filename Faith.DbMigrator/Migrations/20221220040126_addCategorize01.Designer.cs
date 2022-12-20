@@ -3,6 +3,7 @@ using System;
 using Faith.DbMigrator.Faith.Dbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Faith.DbMigrator.Migrations
 {
     [DbContext(typeof(faithdbContext))]
-    partial class faithdbContextModelSnapshot : ModelSnapshot
+    [Migration("20221220040126_addCategorize01")]
+    partial class addCategorize01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,9 +77,6 @@ namespace Faith.DbMigrator.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("IsDel")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Level")
                         .HasColumnType("int");
 
                     b.Property<string>("ParentId")

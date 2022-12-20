@@ -16,6 +16,7 @@ namespace FaithCore6Web.Controller
     [ApiController]
     public class UserLoginController : ControllerBase
     {
+
         [HttpPost]
         public async Task<ResultDto<User>> GetLoginUser(UserLoginDto userLogin)
         {

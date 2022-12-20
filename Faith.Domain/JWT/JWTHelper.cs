@@ -12,25 +12,24 @@ namespace Faith.Domain.JWT
 {
     public class JWTHelper
     {
-        private readonly IConfiguration _configuration;
-        public JWTHelper(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
+        
         /// <summary>
         /// 创建token
         /// </summary>
         /// <returns></returns>
         public string CreatToken(string id, string userName)
         {
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json");
+            var _configuration = builder.Build();
             // 1. 定义需要使用到的Claims
             var claims = new[] {
-                new Claim("id",id),
-                new Claim("userName",userName)
+                new Claim(ClaimTypes.NameIdentifier,id),
+                new Claim(ClaimTypes.Name,userName)
             };
             //2.从application.json中读取密钥
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
+            var key = _configuration["JWT:SecretKey"];
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
             //3.选择加密算法
             var algorithm = SecurityAlgorithms.HmacSha256;
             //4.生成Credentials证书 将密码和算法带入
@@ -41,13 +40,13 @@ namespace Faith.Domain.JWT
                 _configuration["Jwt:Audience"],   //Audience
                 claims,                          //Claims,
                 DateTime.Now,                    //notBefore
-                DateTime.Now.AddSeconds(30),    //expires
+                DateTime.Now.AddMinutes(30),    //expires
                 signCredentials               //Credentials
                 );
             // 6. 将token变为string
             var token = new JwtSecurityTokenHandler().WriteToken(jwtSecretToken);
             return token;
         }
-
+    
     }
 }
