@@ -14,14 +14,15 @@ namespace FaithCore6Web.Controller.Articles
     [ApiController]
     public class ArticlesController : ControllerBase
     {
+        private readonly IArticlesService _articlesService;
+        public ArticlesController(IArticlesService _articlesService) { 
+        this._articlesService = _articlesService;
+        }
         [HttpPost]
         public async Task<ResultDto<T_Article>> InsertArticleAsync(InsertArticlesDto dto) {
             try
             {
-                using (var life = ContainerService.BeginLifetimeScope()) {
-                    IArticlesService service = life.Resolve<IArticlesService>();
-                    return await service.InsertArticlesAsync(dto);
-                }
+                return await _articlesService.InsertArticlesAsync(dto);
             }
             catch (UserFriendlyException) {
                 throw;

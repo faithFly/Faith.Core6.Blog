@@ -16,6 +16,10 @@ namespace FaithCore6Web.Controller.Categorize
     [ApiController]
     public class CategorizeController : ControllerBase
     {
+        private readonly ICategorizeService _categorizeService;
+        public CategorizeController(ICategorizeService _categorizeService) { 
+        this._categorizeService = _categorizeService;
+        }
         /// <summary>
         /// 增加分类
         /// </summary>
@@ -25,14 +29,11 @@ namespace FaithCore6Web.Controller.Categorize
         public async Task<ResultDto<T_CategorizeSugar>> InsertCatgorizeSugarAsync(T_CategorizeSugar dto) {
             try
             {
-                using var life = ContainerService.BeginLifetimeScope();
-                ICategorizeService service = life.Resolve<ICategorizeService>();
-                return await service.InsertCatgorizeSugarAsync(dto);
+                return await _categorizeService.InsertCatgorizeSugarAsync(dto);
             }
             catch (UserFriendlyException) { throw; }
             catch (Exception)
             {
-
                 throw new Exception();
             }
         }
@@ -45,9 +46,7 @@ namespace FaithCore6Web.Controller.Categorize
         public async Task<ResultDto<T_CategorizeSugar>> GetCatgorizeSugarAsync(GetCatgorizeDto dto) {
             try
             {
-                using var life = ContainerService.BeginLifetimeScope();
-                ICategorizeService service = life.Resolve<ICategorizeService>();
-                return await service.GetCatgorizeSugarAsync(dto);
+                return await _categorizeService.GetCatgorizeSugarAsync(dto);
             }
             catch (UserFriendlyException) { throw; }
             catch (Exception)
@@ -65,9 +64,7 @@ namespace FaithCore6Web.Controller.Categorize
         public async Task<ResultDto<T_CategorizeSugar>> DelCatgorizeSugarAsync(string cid) {
             try
             {
-                using var life = ContainerService.BeginLifetimeScope();
-                ICategorizeService service = life.Resolve<ICategorizeService>();
-                return await service.DelCatgorizeSugarAsync(cid);
+                return await _categorizeService.DelCatgorizeSugarAsync(cid);
             }
             catch (UserFriendlyException) { throw; }
             catch (Exception)
@@ -85,9 +82,7 @@ namespace FaithCore6Web.Controller.Categorize
         public async Task<ResultDto<T_CategorizeSugar>> UpdateCatgorizeSugarAsync(UpdataCategorizeDto dto) {
             try
             {
-                using var life = ContainerService.BeginLifetimeScope();
-                ICategorizeService service = life.Resolve<ICategorizeService>();
-                return await service.UpdateCatgorizeSugarAsync(dto);
+                return await _categorizeService.UpdateCatgorizeSugarAsync(dto);
             }
             catch (UserFriendlyException) { throw; }
             catch (Exception)

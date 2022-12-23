@@ -60,7 +60,9 @@ namespace Faith.Console6
                         operation1.numberB = 1;
                         Console.WriteLine(operation1.GetResult());*/
             #endregion
-
+            #region redis
+            
+            #endregion
         }
-    }
+     }
 }

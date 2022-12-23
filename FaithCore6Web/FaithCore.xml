@@ -4,5 +4,33 @@
         <name>FaithCore6Web</name>
     </assembly>
     <members>
+        <member name="M:FaithCore6Web.Controller.Categorize.CategorizeController.InsertCatgorizeSugarAsync(Faith.Core6.SqlSugar.Repsoitory.T_CategorizeSugar)">
+            <summary>
+            增加分类
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FaithCore6Web.Controller.Categorize.CategorizeController.GetCatgorizeSugarAsync(Faith.Application.Contracts.Application.Dto.CatgorizeSugarDto.GetCatgorizeDto)">
+            <summary>
+            获取分类列表
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FaithCore6Web.Controller.Categorize.CategorizeController.DelCatgorizeSugarAsync(System.String)">
+            <summary>
+            删除分类
+            </summary>
+            <param name="cid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FaithCore6Web.Controller.Categorize.CategorizeController.UpdateCatgorizeSugarAsync(Faith.Application.Contracts.Application.Dto.CatgorizeSugarDto.UpdataCategorizeDto)">
+            <summary>
+            更新
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Faith.Application.Contracts\Faith.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Faith.Core6.Redis\Faith.Core6.Redis.csproj" />
     <ProjectReference Include="..\Faith.DbMigrator\Faith.DbMigrator.csproj" />
     <ProjectReference Include="..\Faith.Domain\Faith.Domain.csproj" />
   </ItemGroup>

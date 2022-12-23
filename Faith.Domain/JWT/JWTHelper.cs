@@ -12,16 +12,22 @@ namespace Faith.Domain.JWT
 {
     public class JWTHelper
     {
-        
+        private readonly IConfiguration _configuration;
+
+        public JWTHelper(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         /// <summary>
         /// 创建token
         /// </summary>
         /// <returns></returns>
         public string CreatToken(string id, string userName)
         {
-            var builder = new ConfigurationBuilder();
+            /*var builder = new ConfigurationBuilder();
             builder.AddJsonFile("appsettings.json");
-            var _configuration = builder.Build();
+            var _configuration = builder.Build();*/
             // 1. 定义需要使用到的Claims
             var claims = new[] {
                 new Claim(ClaimTypes.NameIdentifier,id),

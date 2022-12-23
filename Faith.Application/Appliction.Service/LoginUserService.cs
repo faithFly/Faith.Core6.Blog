@@ -1,10 +1,12 @@
 ﻿using Faith.Application.Contracts.Application.Dto;
 using Faith.Application.Contracts.Application.Dto.ExceptionDto;
 using Faith.Application.Contracts.Application.IService;
+using Faith.Core6.Redis;
 using Faith.DbMigrator.Faith.Dbcontext;
 using Faith.Domain.JWT;
 using Faith.EntityModel.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +20,18 @@ namespace Faith.Application.Appliction.Service
     {
         private readonly faithdbContext _client;
         private readonly JWTHelper jWTHelper;
-        public LoginUserService(faithdbContext _client,JWTHelper jWTHelper)
+        private readonly IRedisClient _redis;
+        private readonly IOptions<RedisConfig> _settings;
+        public LoginUserService(faithdbContext _client,
+            JWTHelper jWTHelper,
+            IRedisClient _redis,
+            IOptions<RedisConfig> _settings
+            )
         {
             this._client = _client;
             this.jWTHelper = jWTHelper;
+            this._redis = _redis;
+            this._settings = _settings;
         }
         /// <summary>
         /// 登录
@@ -29,6 +39,7 @@ namespace Faith.Application.Appliction.Service
         /// <param name="userLogin"></param>
         /// <returns></returns>
         public async Task<ResultDto<User>> GetLoginUser(UserLoginDto userLogin) {
+            Console.WriteLine(_settings);
             if (string.IsNullOrEmpty(userLogin.UserName)||string.IsNullOrEmpty(userLogin.UserPassWord))
             {
                 return new ResultDto<User>
@@ -64,6 +75,8 @@ namespace Faith.Application.Appliction.Service
                 await _client.SaveChangesAsync();
                 //token
                 var token = jWTHelper.CreatToken(userObj.Id,userObj.UserName);
+                //redis 存储
+                _redis.Set("FaithWeb:login:token",token,TimeSpan.FromDays(7));
                 return new ResultDto<User>
                 {
                     ResultCode = 200,
