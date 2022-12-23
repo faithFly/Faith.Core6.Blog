@@ -16,17 +16,16 @@ namespace FaithCore6Web.Controller
     [ApiController]
     public class UserLoginController : ControllerBase
     {
-
+        private readonly ILoginUserService _loginUserService;
+        public UserLoginController(ILoginUserService loginUserService) { 
+        this._loginUserService = loginUserService;
+        }
         [HttpPost]
         public async Task<ResultDto<User>> GetLoginUser(UserLoginDto userLogin)
         {
             try
             {
-                using (var life = ContainerService.BeginLifetimeScope())
-                {
-                    ILoginUserService service = life.Resolve<ILoginUserService>();
-                    return await service.GetLoginUser(userLogin);
-                }
+               return await _loginUserService.GetLoginUser(userLogin);
             }
             catch (UserFriendlyException) {
                 throw;
@@ -42,11 +41,7 @@ namespace FaithCore6Web.Controller
         public async Task<ResultDto<User>> RegistUserAsync([FromBody] User user) {
             try
             {
-                using (var life = ContainerService.BeginLifetimeScope())
-                {
-                    ILoginUserService service = life.Resolve<ILoginUserService>();
-                    return await service.RegistUserAsync(user);
-                }
+                return await _loginUserService.RegistUserAsync(user);
             }
             catch (UserFriendlyException)
             {

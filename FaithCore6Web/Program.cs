@@ -27,16 +27,36 @@ using Faith.Domain.AutoMapper;
 var builder = WebApplication.CreateBuilder(args);
 //builder.WebHost.UseUrls(new[] { "http://*:12138" });
 var config = builder.Configuration;
+
+#region automapper
 AutoMapper.IConfigurationProvider mapperConfig = new MapperConfiguration(cfg =>
 {
     cfg.AddProfile<FaithMapperProfile>();
 });
 builder.Services.AddSingleton(mapperConfig);
-builder.Services.AddScoped<IMapper,Mapper>();
-builder.Services.AddHttpClient();
-builder.Services.AddSingleton(new UploadFileHelper(config));
-builder.Services.AddTransient<IFaithUserSession, FaithUserSession>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IMapper, Mapper>();
+#endregion
+
+
+#region 实体类存储配置
+builder.Services.AddOptions();
+builder.Services.Configure<RedisConfig>(opt =>
+{
+    opt.Name = config["Redis:Name"];
+    opt.Ip = config["Redis:Ip"];
+    opt.Password = config["Redis:Password"];
+    opt.Port = config["Redis:Port"];
+    opt.Timeout = config["Redis:Timeout"];
+    opt.Db = config["Redis:Db"];
+    opt.RedisKey = config["Redis:RedisKey"];
+});
+builder.Services.AddScoped<IRedisClient, RedisClient>();
+#endregion
+
+#region DI注入
+builder.Services.RegisterDI(config);
+#endregion
+
 #region 过滤器
 builder.Services.AddControllers(opt => {
     opt.Filters.Add<ExceptionFilter>();
@@ -64,23 +84,9 @@ builder.Services.AddDistributedMemoryCache();
 });*/
 #endregion
 
-#region 实体类存储配置
-builder.Services.Configure<RedisConfig>(opt =>
-{
-    opt.Name = config["Redis:Name"].ToString();
-    opt.Ip = config["Redis:Ip"].ToString();
-    opt.Password = config["Redis:Password"].ToString();
-    opt.Port = int.Parse(config["Redis:Port"]);
-    opt.Timeout = int.Parse(config["Redis:Timeout"]);
-    opt.Db = int.Parse(config["Redis:Db"]);
-    opt.Key = config["Redis:Key"].ToString();
-});
-builder.Services.AddSingleton<IRedisClient, RedisClient>();
-#endregion
-
 #region Jwt
 //注入jwt帮助类
-builder.Services.AddSingleton(new JWTHelper());
+builder.Services.AddSingleton(new JWTHelper(config));
 //注册服务
 builder.Services.AddAuthentication(options =>
 {

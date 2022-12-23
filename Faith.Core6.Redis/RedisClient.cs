@@ -1,9 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Faith.Application.Contracts.Application.Dto.ExceptionDto;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +18,7 @@ namespace Faith.Core6.Redis
         public volatile ConnectionMultiplexer _redisConnection;
         private readonly object _redisConnectionLock = new object();
         private readonly ConfigurationOptions _configOptions;
-        private readonly IOptions<RedisConfig> _settings;
+        private IOptions<RedisConfig> _settings;
         private readonly ILogger<RedisClient> _logger;
         public RedisClient(ILogger<RedisClient> _logger, IOptions<RedisConfig> settings)
         {
@@ -33,30 +36,27 @@ namespace Faith.Core6.Redis
         {
             try
             {
-                if (_settings == null)
-                {
-                    ConfigurationOptions options = new ConfigurationOptions
+                ConfigurationOptions options = new ConfigurationOptions
                     {
                         EndPoints =
                             {
                                 {
                                     _settings.Value.Ip,
-                                    _settings.Value.Port
+                                    int.Parse(_settings.Value.Port)
                                 }
                             },
                         ClientName = _settings.Value.Name,
                         Password = _settings.Value.Password,
-                        ConnectTimeout = _settings.Value.Timeout,
-                        DefaultDatabase = _settings.Value.Db,
+                        ConnectTimeout = int.Parse(_settings.Value.Timeout),
+                        DefaultDatabase = int.Parse(_settings.Value.Db),
+                        AbortOnConnectFail = false
                     };
                     return options;
-                }
-                return null;
             }
             catch (Exception ex)
             {
                 _logger.LogError($"获取Redis配置信息失败：{ex.Message}");
-                return null;
+                throw new UserFriendlyException(404, "服务繁忙！");
             }
 
         }
@@ -208,5 +208,8 @@ namespace Faith.Core6.Redis
         {
             return await _redisConnection.GetDatabase().StringSetAsync(key, value, TimeSpan.FromSeconds(120));
         }
+
+
+
     }
 }
