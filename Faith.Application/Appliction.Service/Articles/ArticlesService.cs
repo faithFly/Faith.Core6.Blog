@@ -15,26 +15,20 @@ namespace Faith.Application.Appliction.Service.Articles
 {
     public class ArticlesService : IArticlesService
     {
-        private readonly UploadFileHelper fileHelper;
         private readonly faithdbContext faithdbContext;
 
-        public ArticlesService(UploadFileHelper fileHelper,
-                               faithdbContext faithdbContext)
+        public ArticlesService(faithdbContext faithdbContext)
         {
-            this.fileHelper = fileHelper;
             this.faithdbContext = faithdbContext;
         }
 
         public async Task<ResultDto<T_Article>> InsertArticlesAsync(InsertArticlesDto dto)
         {
-            //上传图片
-            var fileUrl =await fileHelper.UploadFileAsync(dto.file);
-            if (string.IsNullOrEmpty(fileUrl)) throw new UserFriendlyException(404, "文件上传异常！");
             T_Article t_Article = new T_Article
             {
                 Id = Guid.NewGuid().ToString(),
                 ArticleTitle = dto.ArticleTitle,
-                Md5ArticleFileUrl = fileUrl,
+                Md5ArticleFileUrl = dto.Md5ArticleFileUrl,
                 CategorysId = dto.CategorysId,
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now
@@ -50,5 +44,6 @@ namespace Faith.Application.Appliction.Service.Articles
                 throw new UserFriendlyException(400, "插入失败！");
             }
         }
+
     }
 }

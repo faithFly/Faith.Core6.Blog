@@ -86,7 +86,6 @@ namespace Faith.Core6.IContainerService
         #endregion
         public static void RegisterDI(this IServiceCollection services,IConfiguration config) {
             services.AddHttpClient();
-            services.AddSingleton(new UploadFileHelper(config));
             services.AddTransient<IFaithUserSession, FaithUserSession>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

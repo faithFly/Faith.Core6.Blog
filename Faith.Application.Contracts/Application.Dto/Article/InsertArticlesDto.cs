@@ -21,6 +21,6 @@ namespace Faith.Application.Contracts.Application.Dto.Article
         /// Md5文件路劲
         /// </summary>
         public string Md5ArticleFileUrl { get; set; }
-        public IFormFile file { get; set; }
+        public int MyProperty { get; set; }
     }
 }

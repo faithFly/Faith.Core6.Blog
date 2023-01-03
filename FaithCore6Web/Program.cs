@@ -23,6 +23,9 @@ using Newtonsoft.Json.Serialization;
 using Faith.Domain.UserSession;
 using AutoMapper;
 using Faith.Domain.AutoMapper;
+using Hangfire.Redis;
+using Hangfire;
+using Faith.Core6.HangFire;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.WebHost.UseUrls(new[] { "http://*:12138" });
@@ -37,7 +40,25 @@ builder.Services.AddSingleton(mapperConfig);
 builder.Services.AddScoped<IMapper, Mapper>();
 #endregion
 
-
+#region hangfire
+/*var redisStorage = new RedisStorageOptions
+{
+    Db = config.GetValue<int>("Hangfire:Config:Db"),
+    SucceededListSize = 50000,
+    DeletedListSize = 50000,
+    ExpiryCheckInterval = TimeSpan.FromHours(1),
+    InvisibilityTimeout = TimeSpan.FromHours(3)
+};
+var redisString = config.GetValue<string>("Hangfire:Config:ConnectionString");
+builder.Services.AddHangfire(x =>
+{
+    x.UseRedisStorage(redisString);
+});
+builder.Services.AddHostedService<FaithJob>();*/
+var redisString = config.GetValue<string>("Hangfire:Config:ConnectionString");
+builder.Services.AddHangfire(x => x.UseRedisStorage(redisString));
+builder.Services.AddHangfireServer();
+#endregion
 #region  µÃÂ¿‡¥Ê¥¢≈‰÷√
 builder.Services.AddOptions();
 builder.Services.Configure<RedisConfig>(opt =>
@@ -190,6 +211,7 @@ app.UseSwaggerUI(s =>
     s.SwaggerEndpoint($"/swagger/v1/swagger.json", $"{apiName} v1");
     s.RoutePrefix = "";
 });
+app.UseHangfireDashboard();
 app.UseAuthentication();
 app.UseAuthorization();
 
