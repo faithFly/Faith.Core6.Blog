@@ -18,11 +18,13 @@ namespace FaithCore6Web.Filter
         {
             if (context.Exception is UserFriendlyException ex)
             {
-                context.Result = new ContentResult
+                ResultDto<object> obj = new ResultDto<object>
                 {
-                    StatusCode = ex.Code,
-                    Content = ex.Message
+                    ResultCode = ex.Code,
+                    ResultMsg = ex.Message
                 };
+                context.Result = new OkObjectResult(obj);
+                context.ExceptionHandled = true;
             }
             //如果异常没有被处理
             if (context.ExceptionHandled == false)

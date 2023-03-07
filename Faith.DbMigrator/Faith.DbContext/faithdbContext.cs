@@ -23,12 +23,13 @@ namespace Faith.DbMigrator.Faith.Dbcontext
         public virtual DbSet<T_Log> T_Logs { get; set; }
         public virtual DbSet<T_Article> T_Articles { get; set; }
         public virtual DbSet<T_Categorize> T_Categorize { get; set; }
+        public virtual DbSet<UserLog> UserLog { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("Server=120.79.81.249;Port=3306;Database=faithdb;Uid=root;Pwd=Xyf12138...;pooling=true;",
-                    ServerVersion.Parse("5.7-mysql")
+                optionsBuilder.UseMySql("server=120.79.81.249;port=3306;database=faithdb;uid=root;pwd=Xyf12138.", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.27-mysql")); optionsBuilder.UseMySql("Server=120.79.81.249;Port=3306;Database=faithdb;Uid=root;Pwd=Xyf12138.;pooling=true;",
+                    ServerVersion.Parse("8.0.27-mysql")
                     );
                 optionsBuilder.UseLoggerFactory(logger);
             }

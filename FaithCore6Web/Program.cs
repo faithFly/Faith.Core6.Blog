@@ -59,6 +59,7 @@ var redisString = config.GetValue<string>("Hangfire:Config:ConnectionString");
 builder.Services.AddHangfire(x => x.UseRedisStorage(redisString));
 builder.Services.AddHangfireServer();
 #endregion
+
 #region 实体类存储配置
 builder.Services.AddOptions();
 builder.Services.Configure<RedisConfig>(opt =>
@@ -81,6 +82,7 @@ builder.Services.RegisterDI(config);
 #region 过滤器
 builder.Services.AddControllers(opt => {
     opt.Filters.Add<ExceptionFilter>();
+    opt.Filters.Add<ActionFilter>();
 }).AddNewtonsoftJson(options =>
 {
     //忽略循环引用
@@ -131,21 +133,31 @@ builder.Services.AddAuthentication(options =>
 #endregion
 
 #region ef core
-string connectionString = config["DefaultConnection"];
+/*string connectionString = config["DefaultConnection"];
 //var serverVersion = ServerVersion.AutoDetect(connectionString);
 builder.Services.AddDbContext<faithdbContext>(opt =>
 {
      opt.UseMySql(connectionString,ServerVersion.Parse("5.7-mysql"));
+});*/
+string connectionString = config["DefaultConnection"];
+//var serverVersion = ServerVersion.AutoDetect(connectionString);
+builder.Services.AddDbContext<faithdbContext>(opt =>
+{
+    opt.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.27-mysql"));
 });
 #endregion
- 
+
 #region 跨域
-builder.Services.AddCors(option =>
-    option.AddPolicy("localhost", policy =>
-    policy.AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowAnyOrigin())
-);
+string corsName = "ALL";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsName, policy =>
+    {
+        policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 #endregion
 
 #region Swagger
@@ -184,17 +196,6 @@ builder.Services.AddSwaggerGen(s =>
 #endregion
 
 #region sql suglar
-/*builder.Services.AddScoped<ISqlSugarClient, SqlSugarClient>(opt =>
-{
-    return new SqlSugarClient(new List<ConnectionConfig>() {
-       new ConnectionConfig(){
-           ConfigId=DBEnum.默认数据库,
-           ConnectionString=connectionString,
-           DbType=DbType.MySql,
-           IsAutoCloseConnection=true
-       }
-    });
-});*/
 builder.Services.AddSqlSugar();
 #endregion
 
@@ -214,6 +215,6 @@ app.UseSwaggerUI(s =>
 app.UseHangfireDashboard();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors(corsName);
 app.MapControllers();
 app.Run();
