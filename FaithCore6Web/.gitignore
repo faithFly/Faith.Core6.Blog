@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.idea/.idea.FaithCore6Web/.idea/encodings.xml
+/.idea/.idea.FaithCore6Web/.idea/vcs.xml
+/.idea/.idea.FaithCore6Web/.idea/workspace.xml
